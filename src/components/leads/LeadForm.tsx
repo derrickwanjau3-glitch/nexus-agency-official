@@ -34,7 +34,7 @@ export default function LeadForm() {
       if (response.ok) {
         setStatus("success");
         
-        // Finalize the instant redirect to the owner's WhatsApp number (+254 742 727 451)
+        // Redirect to WhatsApp (+254742727451)
         const message = `Hi NEXUS, I'm ${formData.name} from ${formData.businessName}. I'm interested in ${formData.service}. I just filled out your contact form.`;
         const whatsappUrl = `https://wa.me/254742727451?text=${encodeURIComponent(message)}`;
         
@@ -125,7 +125,7 @@ export default function LeadForm() {
               ) : (
                 <>
                   Get Started Now
-                  <Send size={20} className=\"group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform\" />
+                  <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </>
               )}
             </button>

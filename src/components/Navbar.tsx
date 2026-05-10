@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Zap, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import OpenModalButton from "./OpenModalButton";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,7 +25,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav 
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 ${
         isScrolled ? "bg-black/50 backdrop-blur-xl border-b border-white/5 py-3" : "bg-transparent"
       }`}
@@ -40,21 +41,21 @@ export default function Navbar() {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
+            <a
+              key={link.name}
               href={link.href}
               className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
             >
               {link.name}
             </a>
           ))}
-          <a href="#contact" className="px-6 py-2.5 bg-white text-black rounded-lg font-bold text-sm hover:bg-purple-500 hover:text-white transition-all">
+          <OpenModalButton className="px-6 py-2.5 bg-white text-black rounded-lg font-bold text-sm hover:bg-purple-500 hover:text-white transition-all">
             Get Started
-          </a>
+          </OpenModalButton>
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           className="md:hidden text-white"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
@@ -64,14 +65,14 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-2xl border-b border-white/10 p-6 md:hidden flex flex-col gap-6"
         >
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
+            <a
+              key={link.name}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
               className="text-lg font-medium text-gray-400 hover:text-white transition-colors"
@@ -79,13 +80,9 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
-          <a 
-            href="#contact" 
-            onClick={() => setMobileMenuOpen(false)}
-            className="w-full py-4 bg-purple-600 text-white rounded-xl font-bold text-center"
-          >
+          <OpenModalButton className="w-full py-4 bg-purple-600 text-white rounded-xl font-bold text-center">
             Get Started
-          </a>
+          </OpenModalButton>
         </motion.div>
       )}
     </nav>
