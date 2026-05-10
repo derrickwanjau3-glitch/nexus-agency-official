@@ -1,68 +1,46 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  Bot, 
-  MessageSquare, 
-  FileText, 
-  TrendingUp, 
-  Shield, 
-  Clock, 
-  Cpu, 
-  Zap,
-  CheckCircle2
-} from "lucide-react";
+import { Zap, Bot, MessageSquare, Database, Cpu, TrendingUp } from "lucide-react";
 import Image from "next/image";
+import OpenModalButton from "./OpenModalButton";
 
 const features = [
   {
-    icon: <Cpu className="text-purple-400" />,
-    title: "Automatic AI Number",
-    description: "Every client receives a dedicated AI business number for instant customer handling."
+    title: "AI Business Number",
+    description: "Every client gets an automatic AI business number for instant customer handling.",
+    icon: <Bot className="text-purple-400" />
   },
   {
-    icon: <MessageSquare className="text-blue-400" />,
-    title: "Smart Inquiry Handling",
-    description: "AI automatically manages customer inquiries, bookings, and basic support 24/7."
+    title: "Smart Storage",
+    description: "AI stores all customer messages and project files automatically in your dashboard.",
+    icon: <Database className="text-blue-400" />
   },
   {
-    icon: <FileText className="text-cyan-400" />,
-    title: "Automated Data Storage",
-    description: "All customer messages and project files are securely stored and organized by AI."
+    title: "Auto Inquiries",
+    description: "AI handles inquiries automatically, qualifying leads while you sleep.",
+    icon: <MessageSquare className="text-green-400" />
   },
   {
-    icon: <TrendingUp className="text-green-400" />,
-    title: "Progress Tracking",
-    description: "Real-time AI-powered tracking of your website build and automation deployment."
-  },
-  {
-    icon: <Clock className="text-orange-400" />,
-    title: "Live Project Review",
-    description: "Clients can review work live as the AI and team build your digital experience."
-  },
-  {
-    icon: <Shield className="text-red-400" />,
-    title: "History & Backups",
-    description: "Automatic project history logging and triple-redundant secure cloud backups."
+    title: "Live Tracking",
+    description: "Track your website development progress live with automatic AI updates.",
+    icon: <TrendingUp className="text-yellow-400" />
   }
 ];
 
 export default function AIAutomationSection() {
   return (
-    <section className="py-32 relative overflow-hidden bg-black/40">
-      {/* Background elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,_rgba(139,92,246,0.05)_0%,_transparent_70%)] -z-10" />
-      
+    <section id="ai-system" className="py-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 text-purple-400 text-sm font-medium border border-purple-500/20"
           >
-            <Bot size={16} />
-            <span>Core Technology</span>
+            <Cpu size={16} />
+            <span>NEXUS AI SYSTEM</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -70,18 +48,21 @@ export default function AIAutomationSection() {
             viewport={{ once: true }}
             className="text-4xl md:text-6xl font-bold text-white mb-6"
           >
-            NEXUS <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">AI SYSTEM</span>
+            Intelligent <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Automation</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-gray-400 max-w-2xl mx-auto text-lg"
+            className="text-gray-400 max-w-2xl mx-auto text-lg mb-8"
           >
             A revolutionary intelligent ecosystem that powers your business, 
             manages your clients, and automates your entire digital presence.
           </motion.p>
+          <OpenModalButton className="px-8 py-4 bg-purple-600 rounded-xl font-bold text-white hover:bg-purple-700 transition-all shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+            Deploy AI Now
+          </OpenModalButton>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -122,12 +103,11 @@ export default function AIAutomationSection() {
                 </div>
                 <div className="text-[10px] text-gray-500 font-mono tracking-tighter">NEXUS_OS_V2.0</div>
               </div>
-              
               <div className="relative rounded-xl overflow-hidden aspect-[16/10]">
-                <Image 
-                  src="/assets/dashboard-mockup.png" 
-                  alt="Nexus AI Dashboard" 
-                  fill 
+                <Image
+                  src="/assets/dashboard-mockup.png"
+                  alt="Nexus AI Dashboard"
+                  fill
                   className="object-cover"
                 />
                 

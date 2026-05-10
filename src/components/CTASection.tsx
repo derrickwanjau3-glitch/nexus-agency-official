@@ -1,9 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { MessageSquare } from "lucide-react";
 import LeadForm from "./leads/LeadForm";
 
 export default function CTASection() {
+  const openWhatsApp = () => {
+    window.open("https://wa.me/254742727451", "_blank");
+  };
+
   return (
     <section id="contact" className="py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-purple-600/5 -z-10" />
@@ -41,9 +46,25 @@ export default function CTASection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-left"
+              className="text-left mb-12"
             >
               <LeadForm />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="flex justify-center"
+            >
+              <button
+                onClick={openWhatsApp}
+                className="px-8 py-4 glass hover:bg-white/10 text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-2 border border-white/10 cursor-pointer"
+              >
+                <MessageSquare size={20} />
+                Talk To Our AI Directly
+              </button>
             </motion.div>
           </div>
 
