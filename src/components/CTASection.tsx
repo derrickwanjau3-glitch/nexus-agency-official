@@ -4,8 +4,12 @@ import { motion } from "framer-motion";
 import { ArrowRight, MessageSquare } from "lucide-react";
 
 export default function CTASection() {
+  const openWhatsApp = () => {
+    window.open("https://wa.me/254700000000", "_blank");
+  };
+
   return (
-    <section className="py-32 relative overflow-hidden">
+    <section id="contact" className="py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-purple-600/5 -z-10" />
       
       <div className="max-w-7xl mx-auto px-6">
@@ -44,11 +48,19 @@ export default function CTASection() {
             transition={{ delay: 0.2 }}
             className="flex flex-col sm:flex-row gap-6 justify-center"
           >
-            <button className="px-10 py-5 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-bold transition-all neon-border flex items-center justify-center gap-2 group shadow-[0_0_30px_rgba(139,92,246,0.3)]">
+            <a 
+              href="https://wa.me/254700000000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-10 py-5 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-bold transition-all neon-border flex items-center justify-center gap-2 group shadow-[0_0_30px_rgba(139,92,246,0.3)] cursor-pointer"
+            >
               Start Your Project
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="px-10 py-5 glass hover:bg-white/10 text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-2 border border-white/10">
+            </a>
+            <button 
+              onClick={openWhatsApp}
+              className="px-10 py-5 glass hover:bg-white/10 text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-2 border border-white/10 cursor-pointer"
+            >
               <MessageSquare size={20} />
               Talk To Our AI
             </button>

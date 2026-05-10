@@ -138,13 +138,13 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-6 mb-12 justify-center lg:justify-start"
           >
-            <button className="px-10 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold transition-all neon-border flex items-center justify-center gap-2 group shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+            <a href="#contact" className="px-10 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold transition-all neon-border flex items-center justify-center gap-2 group shadow-[0_0_20px_rgba(139,92,246,0.3)]">
               Get Started
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="px-10 py-4 glass hover:bg-white/10 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2 border border-white/10">
+            </a>
+            <a href="#portfolio" className="px-10 py-4 glass hover:bg-white/10 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2 border border-white/10 text-center">
               View Our Work
-            </button>
+            </a>
           </motion.div>
 
           <motion.div 

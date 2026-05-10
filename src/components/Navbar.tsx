@@ -30,12 +30,12 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-2 group cursor-pointer">
+        <a href="#" className="flex items-center gap-2 group cursor-pointer">
           <div className="w-10 h-10 rounded-xl bg-purple-600 flex items-center justify-center text-white shadow-[0_0_15px_rgba(139,92,246,0.5)] group-hover:scale-110 transition-transform">
             <Zap size={20} fill="white" />
           </div>
           <span className="text-2xl font-black tracking-tighter text-white">NEXUS</span>
-        </div>
+        </a>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
@@ -48,9 +48,9 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
-          <button className="px-6 py-2.5 bg-white text-black rounded-lg font-bold text-sm hover:bg-purple-500 hover:text-white transition-all">
+          <a href="#contact" className="px-6 py-2.5 bg-white text-black rounded-lg font-bold text-sm hover:bg-purple-500 hover:text-white transition-all">
             Get Started
-          </button>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -79,9 +79,13 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
-          <button className="w-full py-4 bg-purple-600 text-white rounded-xl font-bold">
+          <a 
+            href="#contact" 
+            onClick={() => setMobileMenuOpen(false)}
+            className="w-full py-4 bg-purple-600 text-white rounded-xl font-bold text-center"
+          >
             Get Started
-          </button>
+          </a>
         </motion.div>
       )}
     </nav>

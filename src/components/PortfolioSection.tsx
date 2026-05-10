@@ -99,14 +99,12 @@ export default function PortfolioSection() {
               We don't just build websites; we create digital masterpieces that elevate brands and drive unprecedented growth.
             </motion.p>
           </div>
-          <motion.button
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mt-8 md:mt-0 px-8 py-4 glass hover:bg-white/10 text-white rounded-xl font-bold transition-all border border-white/10"
+          <a 
+            href="#contact"
+            className="mt-8 md:mt-0 px-8 py-4 glass hover:bg-white/10 text-white rounded-xl font-bold transition-all border border-white/10 text-center"
           >
             View All Work
-          </motion.button>
+          </a>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
