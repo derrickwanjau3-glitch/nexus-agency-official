@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+const SHARED_LEADS_PATH = "/home/team/shared/leads.json";
+
 export async function POST(request: Request) {
   try {
     const data = await request.json();
@@ -19,22 +21,26 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString(),
     };
 
-    const filePath = path.join(process.cwd(), "data", "leads.json");
-    
-    // Ensure the data directory exists
-    const dataDir = path.join(process.cwd(), "data");
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir);
-    }
-
     let leads = [];
-    if (fs.existsSync(filePath)) {
-      const fileContent = fs.readFileSync(filePath, "utf-8");
-      leads = JSON.parse(fileContent);
+    if (fs.existsSync(SHARED_LEADS_PATH)) {
+      try {
+        const fileContent = fs.readFileSync(SHARED_LEADS_PATH, "utf-8");
+        leads = JSON.parse(fileContent);
+      } catch (e) {
+        console.error("Error parsing leads file:", e);
+        leads = [];
+      }
     }
 
     leads.push(lead);
-    fs.writeFileSync(filePath, JSON.stringify(leads, null, 2));
+    
+    // Ensure the directory exists (it should, but just in case)
+    const dir = path.dirname(SHARED_LEADS_PATH);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
+    fs.writeFileSync(SHARED_LEADS_PATH, JSON.stringify(leads, null, 2));
 
     return NextResponse.json({ success: true, lead });
   } catch (error) {
@@ -45,13 +51,13 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), "data", "leads.json");
-    if (fs.existsSync(filePath)) {
-      const fileContent = fs.readFileSync(filePath, "utf-8");
+    if (fs.existsSync(SHARED_LEADS_PATH)) {
+      const fileContent = fs.readFileSync(SHARED_LEADS_PATH, "utf-8");
       return NextResponse.json(JSON.parse(fileContent));
     }
     return NextResponse.json([]);
   } catch (error) {
+    console.error("Error fetching leads:", error);
     return NextResponse.json({ error: "Failed to fetch leads" }, { status: 500 });
   }
 }
