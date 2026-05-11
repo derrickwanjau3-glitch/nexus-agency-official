@@ -35,6 +35,16 @@ const portfolioItems = [
     category: "Medical",
     image: "/assets/portfolio-medical.png",
   },
+  {
+    title: "Prestige Academy",
+    category: "Education",
+    image: "/assets/portfolio-school.png",
+  },
+  {
+    title: "The Gentleman's Cut",
+    category: "Barbershop",
+    image: "/assets/portfolio-barbershop.png",
+  },
 ];
 
 const PortfolioCard = ({ item, index }: { item: typeof portfolioItems[0]; index: number }) => {
