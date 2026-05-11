@@ -24,28 +24,30 @@ export default function LeadForm() {
     e.preventDefault();
     setStatus("loading");
 
+    // Pre-calculate WhatsApp URL
+    const message = `Hi NEXUS, I'm ${formData.name} from ${formData.businessName}. I'm interested in ${formData.service}. I just filled out your contact form.`;
+    const whatsappUrl = `https://wa.me/254742727451?text=${encodeURIComponent(message)}`;
+
     try {
+      // 1. Try to save to database (Local or External)
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        setStatus("success");
-        
-        // Redirect to WhatsApp (+254742727451)
-        const message = `Hi NEXUS, I'm ${formData.name} from ${formData.businessName}. I'm interested in ${formData.service}. I just filled out your contact form.`;
-        const whatsappUrl = `https://wa.me/254742727451?text=${encodeURIComponent(message)}`;
-        
-        setTimeout(() => {
-          window.open(whatsappUrl, "_blank");
-        }, 1500);
-      } else {
-        setStatus("error");
-      }
+      // Even if saving to DB fails (e.g. read-only filesystem on Vercel),
+      // we proceed to WhatsApp so the business doesn't lose the lead.
+      setStatus("success");
+      
+      // Open WhatsApp immediately to avoid popup blockers
+      window.location.href = whatsappUrl;
+      
     } catch (error) {
-      setStatus("error");
+      console.error("Lead submission error:", error);
+      // Fallback: Redirect to WhatsApp even on network failure
+      setStatus("success");
+      window.location.href = whatsappUrl;
     }
   };
 
@@ -62,8 +64,8 @@ export default function LeadForm() {
             <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="text-green-500" size={32} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-            <p className="text-gray-400 mb-6">Redirecting you to our WhatsApp for instant response...</p>
+            <h3 className="text-2xl font-bold text-white mb-2">Connecting to NEXUS...</h3>
+            <p className="text-gray-400 mb-6">Opening WhatsApp to connect you with our AI team.</p>
           </motion.div>
         ) : (
           <motion.form
@@ -120,19 +122,15 @@ export default function LeadForm() {
               {status === "loading" ? (
                 <>
                   <Loader2 className="animate-spin" size={20} />
-                  Processing...
+                  Initializing...
                 </>
               ) : (
                 <>
-                  Get Started Now
+                  Get Started
                   <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </>
               )}
             </button>
-            
-            {status === "error" && (
-              <p className="text-red-400 text-sm text-center mt-4">Something went wrong. Please try again or message us directly.</p>
-            )}
           </motion.form>
         )}
       </AnimatePresence>
