@@ -18,22 +18,22 @@ const portfolioItems = [
   {
     title: "Azure Heights",
     category: "Real Estate",
-    image: "/assets/portfolio-fashion.png", // Placeholder
+    image: "/assets/portfolio-realestate.png",
   },
   {
     title: "Serene Stays",
     category: "Hotel",
-    image: "/assets/portfolio-restaurant.png", // Placeholder
+    image: "/assets/portfolio-hotel.png",
   },
   {
     title: "Nexus Tech Lab",
     category: "Tech Startup",
-    image: "/assets/portfolio-fashion.png", // Placeholder
+    image: "/assets/portfolio-tech.png",
   },
   {
     title: "Vitality Clinic",
     category: "Medical",
-    image: "/assets/portfolio-restaurant.png", // Placeholder
+    image: "/assets/portfolio-medical.png",
   },
 ];
 
