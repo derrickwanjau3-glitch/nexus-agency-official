@@ -2,7 +2,10 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const SHARED_LEADS_PATH = "/home/team/shared/leads.json";
+// Function to get the local leads path relative to the project root
+const getLeadsPath = () => {
+  return path.join(process.cwd(), "data", "leads.json");
+};
 
 export async function POST(request: Request) {
   try {
@@ -21,10 +24,18 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString(),
     };
 
+    const leadsPath = getLeadsPath();
     let leads = [];
-    if (fs.existsSync(SHARED_LEADS_PATH)) {
+
+    // Ensure the data directory exists
+    const dir = path.dirname(leadsPath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
+    if (fs.existsSync(leadsPath)) {
       try {
-        const fileContent = fs.readFileSync(SHARED_LEADS_PATH, "utf-8");
+        const fileContent = fs.readFileSync(leadsPath, "utf-8");
         leads = JSON.parse(fileContent);
       } catch (e) {
         console.error("Error parsing leads file:", e);
@@ -33,14 +44,7 @@ export async function POST(request: Request) {
     }
 
     leads.push(lead);
-    
-    // Ensure the directory exists (it should, but just in case)
-    const dir = path.dirname(SHARED_LEADS_PATH);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-
-    fs.writeFileSync(SHARED_LEADS_PATH, JSON.stringify(leads, null, 2));
+    fs.writeFileSync(leadsPath, JSON.stringify(leads, null, 2));
 
     return NextResponse.json({ success: true, lead });
   } catch (error) {
@@ -51,8 +55,9 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    if (fs.existsSync(SHARED_LEADS_PATH)) {
-      const fileContent = fs.readFileSync(SHARED_LEADS_PATH, "utf-8");
+    const leadsPath = getLeadsPath();
+    if (fs.existsSync(leadsPath)) {
+      const fileContent = fs.readFileSync(leadsPath, "utf-8");
       return NextResponse.json(JSON.parse(fileContent));
     }
     return NextResponse.json([]);
